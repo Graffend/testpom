@@ -41,6 +41,17 @@
         <url>http://www.graffend.com/</url>
     </organization>
 
+    <developers>
+        <developer>
+            <id>graffend</id>
+            <name>Graffend Build System</name>
+            <email>builds@graffend.com</email>
+            <url>https://www.graffend.com/</url>
+            <organization>Graffend Corporation</organization>
+            <organizationUrl>https://www.graffend.com/</organizationUrl>
+        </developer>
+    </developers>
+
     <properties>
         <revision>0.0</revision>
         <changelist>0-SNAPSHOT</changelist>
