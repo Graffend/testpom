@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright © 2021 Graffend Corporation (info@graffend.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.graffend.maven</groupId>
+    <artifactId>testpom</artifactId>
+    <version>${revision}.${changelist}</version>
+    <packaging>pom</packaging>
+
+    <name>Test POM</name>
+    <description>Basic POM to test builds</description>
+    <inceptionYear>2021</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Graffend Corporation</name>
+        <url>http://www.graffend.com/</url>
+    </organization>
+
+    <properties>
+        <revision>0.0</revision>
+        <changelist>0-SNAPSHOT</changelist>
+
+        <java.reqversion>[1.8,1.9)</java.reqversion>
+        <maven.reqversion>[3.5,)</maven.reqversion>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+
+        <!-- project base url -->
+        <baseurl>https://github.com/${repository.owner}/${repository.name}</baseurl>
+
+        <!-- text encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- scm & site publish -->
+        <repository.owner>graffend</repository.owner>
+        <repository.name>testpom</repository.name>
+        <scmBase.connection>scm:git:${baseurl}.git</scmBase.connection>
+        <scmBase.url>${baseurl}</scmBase.url>
+        <scmBase.developerConnection>scm:${baseurl}.git</scmBase.developerConnection>
+        <scmBase.tag>HEAD</scmBase.tag>
+        <scmBase.sitePublishBranch>gh-pages</scmBase.sitePublishBranch>
+        <scmBase.ciIgnoreSuffix>[skip ci]</scmBase.ciIgnoreSuffix>
+
+        <!-- plugins/extensions -->
+        <checkstyle.version>8.40</checkstyle.version>
+        <clirr-maven.version>2.8</clirr-maven.version>
+        <doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
+        <exec-maven.version>3.0.0</exec-maven.version>
+        <flatten-maven.version>1.7.20200503171255</flatten-maven.version>
+        <jacoco-maven.version>0.8.6</jacoco-maven.version>
+        <license-maven.version>4.0.rc2</license-maven.version>
+        <maven-antrun.version>3.0.0</maven-antrun.version>
+        <maven-assembly.version>3.3.0</maven-assembly.version>
+        <maven-changes.version>2.12.1</maven-changes.version>
+        <maven-checkstyle.version>3.1.2</maven-checkstyle.version>
+        <maven-clean.version>3.1.0</maven-clean.version>
+        <maven-compiler.version>3.8.1</maven-compiler.version>
+        <maven-dependency.version>3.1.2</maven-dependency.version>
+        <maven-deploy.version>3.0.0-M1</maven-deploy.version>
+        <maven-enforcer.version>3.0.0-M3</maven-enforcer.version>
+        <maven-gpg.version>1.6</maven-gpg.version>
+        <maven-install.version>3.0.0-M1</maven-install.version>
+        <maven-jar.version>3.2.0</maven-jar.version>
+        <maven-javadoc.version>3.2.0</maven-javadoc.version>
+        <maven-jxr.version>3.0.0</maven-jxr.version>
+        <maven-pmd.version>3.14.0</maven-pmd.version>
+        <maven-project-info-reports.version>3.1.1</maven-project-info-reports.version>
+        <maven-release.version>3.0.0-M1</maven-release.version>
+        <maven-resources.version>3.2.0</maven-resources.version>
+        <maven-scm.version>1.11.2</maven-scm.version>
+        <maven-scm-publish.version>3.1.0</maven-scm-publish.version>
+        <maven-shade.version>3.2.4</maven-shade.version>
+        <maven-site.version>3.9.1</maven-site.version>
+        <maven-source.version>3.2.1</maven-source.version>
+        <maven-surefire.version>3.0.0-M5</maven-surefire.version>
+        <mpl-checkstyle.version>0.0.40</mpl-checkstyle.version>
+        <nexus-staging-maven.version>1.6.8</nexus-staging-maven.version>
+        <ossindex-maven-enforcer-rules.version>3.1.0</ossindex-maven-enforcer-rules.version>
+        <swagger-maven.version>2.1.6</swagger-maven.version>
+        <templating-maven.version>1.0.0</templating-maven.version>
+        <versions-maven.version>2.8.1</versions-maven.version>
+    </properties>
+
+    <url>${baseurl}</url>
+
+    <issueManagement>
+        <url>${baseurl}/issues</url>
+        <system>GitHub</system>
+    </issueManagement>
+
+    <scm>
+        <connection>${scmBase.connection}</connection>
+        <url>${scmBase.url}</url>
+        <developerConnection>${scmBase.developerConnection}</developerConnection>
+        <tag>${scmBase.tag}</tag>
+    </scm>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.carrotgarden.maven</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven.version}</version>
+                    <configuration>
+                        <!-- Control dependency resolution. -->
+                        <performDependencyResolve>true</performDependencyResolve>
+                        <includeScope>runtime</includeScope>
+                        <excludeTransitive>false</excludeTransitive>
+                        <resolveExclusions>true</resolveExclusions>
+
+                        <!-- scope erasure -->
+                        <performEraseScopes>true</performEraseScopes>
+                        <scopeEraseList>test</scopeEraseList>
+
+                        <!-- Remove these pom.xml members. -->
+                        <performRemoveMembers>true</performRemoveMembers>
+                        <memberRemoveList>
+                            <member>parent</member>
+                            <member>properties</member>
+                            <member>distributionManagement</member>
+                            <member>repositories</member>
+                            <member>pluginRepositories</member>
+                            <member>build</member>
+                            <member>profiles</member>
+                            <member>reporting</member>
+                            <member>modules</member>
+                            <member>issueManagement</member>
+                            <member>inceptionYear</member>
+                        </memberRemoveList>
+
+                        <!-- override identity -->
+                        <performOverrideIdentity>false</performOverrideIdentity>
+
+                        <!-- Switch project from pom.xml to pom.xml.flatten. -->
+                        <performSwitchPomXml>true</performSwitchPomXml>
+                        <packagingSwitchList>
+                            <packaging>pom</packaging>
+                            <packaging>tile</packaging>
+                            <packaging>jar</packaging>
+                            <packaging>war</packaging>
+                            <packaging>ear</packaging>
+                            <packaging>bundle</packaging>
+                            <packaging>maven-plugin</packaging>
+                        </packagingSwitchList>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${license-maven.version}</version>
+                    <configuration>
+                        <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                        <properties>
+                            <owner>Graffend Corporation</owner>
+                            <email>info@graffend.com</email>
+                        </properties>
+                        <excludes>
+                            <exclude>LICENSE</exclude>
+                            <exclude>nb-licenseheader.txt</exclude>
+                            <exclude>README.markdown</exclude>
+                            <exclude>src/site/markdown/*</exclude>
+                            <exclude>.vagrant/**</exclude>
+                            <exclude>.flattened-pom.xml</exclude>
+                        </excludes>
+                        <mapping>
+                            <markdown>DOUBLESLASH_STYLE</markdown>
+                            <NOTICE>TEXT</NOTICE>
+                            <copyright>TEXT</copyright>
+                            <bsh>JAVADOC_STYLE</bsh>
+                            <Vagrantfile>SCRIPT_STYLE</Vagrantfile>
+                        </mapping>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                      <dependency>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin-git</artifactId>
+                        <version>${license-maven.version}</version>
+                      </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${maven-antrun.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency.version}</version>
+                    <executions>
+                        <execution>
+                            <id>analyze</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>analyze-only</goal>
+                            </goals>
+                            <configuration>
+                                <failOnWarning>true</failOnWarning>
+                                <ignoreNonCompile>true</ignoreNonCompile>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy.version}</version>
+                    <configuration>
+              					<skip>true</skip>
+            				</configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.sonatype.ossindex.maven</groupId>
+                            <artifactId>ossindex-maven-enforcer-rules</artifactId>
+                            <version>${ossindex-maven-enforcer-rules.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                      <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                          <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                          <rules>
+                            <banDuplicatePomDependencyVersions/>
+                            <dependencyConvergence/>
+                            <requireJavaVersion>
+                              <version>${java.reqversion}</version>
+                            </requireJavaVersion>
+                            <requireMavenVersion>
+                              <version>${maven.reqversion}</version>
+                            </requireMavenVersion>
+                            <requireNoRepositories/>
+                            <requireReleaseDeps>
+                              <onlyWhenRelease>true</onlyWhenRelease>
+                            </requireReleaseDeps>
+                            <requireUpperBoundDeps/>
+                            <banVulnerable implementation="org.sonatype.ossindex.maven.enforcer.BanVulnerableDependencies"/>
+                          </rules>
+                        </configuration>
+                      </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>${maven-scm.version}</version>
+                    <configuration>
+                        <tag>${project.version}</tag>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <version>${maven-scm-publish.version}</version>
+                    <configuration>
+                        <checkoutDirectory>${project.build.directory}/scmpublish</checkoutDirectory>
+                        <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version} ${scmBase.ciIgnoreSuffix}
+                        </checkinComment>
+                        <content>${project.build.directory}/staging</content>
+                        <skipDeletedFiles>true</skipDeletedFiles>
+                        <scmBranch>${scmBase.sitePublishBranch}</scmBranch>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>scm-publish</id>
+                            <phase>site-deploy</phase>
+                            <goals>
+                                <goal>publish-scm</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.doxia</groupId>
+                            <artifactId>doxia-module-markdown</artifactId>
+                            <version>${doxia-module-markdown.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <skipDeploy>true</skipDeploy>
+                    </configuration>
+                </plugin>
+                <plugin>
+            				<groupId>org.sonatype.plugins</groupId>
+            				<artifactId>nexus-staging-maven-plugin</artifactId>
+            				<version>${nexus-staging-maven.version}</version>
+            				<executions>
+              					<execution>
+                						<id>default-deploy</id>
+                						<phase>deploy</phase>
+                						<goals>
+                  							<goal>deploy</goal>
+                						</goals>
+              					</execution>
+            				</executions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+          			</plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions-maven.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>com.carrotgarden.maven</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>${maven-changes.version}</version>
+                <configuration>
+                    <includeOpenIssues>false</includeOpenIssues>
+                    <onlyMilestoneIssues>false</onlyMilestoneIssues>
+                    <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>github-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+           <id>scm-publish</id>
+           <url>${scmBase.connection}</url>
+       </site>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>enable-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>enableSigning</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
